@@ -6,7 +6,8 @@ export default function Drafts() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/prism/drafts?status=pending')
+    // Browser calls VPS directly — CORS enabled on Flask
+    fetch('http://194.163.136.244:8000/api/drafts?status=pending')
       .then(r => r.json())
       .then(d => { setDrafts(Array.isArray(d) ? d : []); setLoading(false); })
       .catch(() => setLoading(false));
